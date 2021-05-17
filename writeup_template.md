@@ -1,47 +1,90 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
-
-**Finding Lane Lines on the Road**
-
-The goals / steps of this project are the following:
-* Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
-
-
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
-
----
-
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. Describing my pipeline
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of 5 steps. First, I converted the images to grayscale and included Gaussian smoothing, then I applied the Canny transform to detect the edges and an image mask to select the region of interest. Finally, I drew the hough lines.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+<p align="center">
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+<img alt="Step 0" src="./images/step0.png">
 
-![alt text][image1]
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Step 1" src="./images/step1.png">
+
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Step 2" src="./images/step2.png">
+
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Step 3" src="./images/step3.png">
+
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Step 4" src="./images/step4.png">
+
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Step 5" src="./images/step5.png">
+
+</p>
+<br>
+<p align="center">
+▼
+</p>
+<br>
+<p align="center">
+
+<img alt="Final image" src="./images/step6.png">
+
+</p>
+
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by separating line segments by their slope ((y2-y1)/(x2-x1)) to decide which segments are part of the left line vs. the right line. Then, I averaged the position of each of the lines and extrapolated to the top and bottom of the lane.
 
 
-### 2. Identify potential shortcomings with your current pipeline
+### 2. Identifying potential shortcomings with my current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be what would happen when lines are hit by shadows, hidden by other cars or close to other similar features on the road. 
 
-Another shortcoming could be ...
+Another shortcoming could be identifying the lines if they get out of the region of interest like when a car changes lanes.
 
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Suggesting possible improvements to my pipeline
 
-A possible improvement would be to ...
+A possible improvement would be to use the HSV color space to deal with shadows.
 
-Another potential improvement could be to ...
+Another potential improvement could be to use machine learning to identify lane lines.
